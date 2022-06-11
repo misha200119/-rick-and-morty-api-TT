@@ -1,0 +1,50 @@
+.characterList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  height: 400px;
+
+  overflow-y: scroll;
+  
+  padding: 15px;
+
+  background-color: beige;
+  
+  &__contentContainer {
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 30px;
+
+    background-color: bisque;
+    border: 1px solid black;
+
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(159, 145, 129);
+    }
+
+    transition: all 0.4s;
+  }
+
+  &__image {
+    width: 50px;
+    height: 50px;
+  }
+
+  &__aliveStatus {
+    &__dead {
+      color: red;
+    }
+    &__alive {
+      color: green;
+    }
+    &__unknown {
+      color: gray;
+    }
+  }
+}
