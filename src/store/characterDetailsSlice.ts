@@ -25,12 +25,12 @@ interface ListOfCharsState {
 
 const initialState: ListOfCharsState = {
   selectedCharacter: null,
-  isDetailsLoading: false,
+  isDetailsLoading: true,
 };
 
 export const loadCharacterById = createAsyncThunk(
   'characterDetails/fetchUserPostsById',
-  async (characterId: number, thunkAPI) => {
+  async (characterId: string, thunkAPI) => {
     const { dispatch } = thunkAPI;
 
     dispatch(setIsDetailsLoading(true));
@@ -67,8 +67,8 @@ export const {
 } = characterDetails.actions;
 
 export const selectors = {
-  getPosts: (state: RootState) => state.characterDetails.selectedCharacter,
-  getSelectedPostId: (state: RootState) => state.characterDetails.isDetailsLoading,
+  getSelectedCharacter: (state: RootState) => state.characterDetails.selectedCharacter,
+  getIsDetailsLoading: (state: RootState) => state.characterDetails.isDetailsLoading,
 };
 
 export default characterDetails.reducer;

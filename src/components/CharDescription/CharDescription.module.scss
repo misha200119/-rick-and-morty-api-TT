@@ -1,0 +1,18 @@
+.charDescription {
+  margin-top: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  &__image {
+    width: 150px;
+    height: 150px;
+  }
+
+  &__listEpisodes {
+    width: auto;
+    
+  }
+}

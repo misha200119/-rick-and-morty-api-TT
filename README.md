@@ -1,9 +1,4 @@
-# React TypeScript Starter Pack
+# React Rick and Morty Test Task
 
-To use this template click `Use this template`
+[DEMO_LINK](https://misha200119.github.io/rick-and-morty-api-TT/)
 
-### Available Scripts
-
-`Deploy` - available to deploy your application to gh-pages
-
-`SCSS Preprocessor` - available to write your styles with modern style language

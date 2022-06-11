@@ -9,7 +9,7 @@ export const getCharacters = async (numberPage: string): Promise<CharactersRespo
   return response.json();
 };
 
-export const getCharacterById = async (id: number): Promise<Character> => {
+export const getCharacterById = async (id: string): Promise<Character> => {
   const response = await fetch(`${BASE_URL}/character/${id}`);
 
   return response.json();
