@@ -4,7 +4,7 @@
   flex-direction: column;
   gap: 2px;
 
-  height: 400px;
+  height: 350px;
 
   overflow-y: scroll;
   
@@ -22,6 +22,7 @@
 
     background-color: bisque;
     border: 1px solid black;
+    border-radius: 10px;
 
     cursor: pointer;
     &:hover {

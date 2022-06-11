@@ -15,9 +15,10 @@ import {
   selectors,
   loadCharactersPage,
 } from '../../store/listOfCharsSlice';
+import { Character } from '../../types/Character';
+import { PagesNavigator } from '../PagesNavigator';
 
 import styles from './CharactersList.module.scss';
-import { Character } from '../../types/Character';
 
 export const CharactersList: React.FC<{}> = React.memo(() => {
   const { charId } = useParams<{ charId: string }>();
@@ -37,7 +38,7 @@ export const CharactersList: React.FC<{}> = React.memo(() => {
 
   useEffect(() => {
     dispath(loadCharactersPage(currentPage));
-  }, []);
+  }, [currentPage]);
 
   if (charId) {
     return (
@@ -116,6 +117,7 @@ export const CharactersList: React.FC<{}> = React.memo(() => {
                 </li>
               ))}
             </ul>
+            <PagesNavigator />
           </>
         )
       }

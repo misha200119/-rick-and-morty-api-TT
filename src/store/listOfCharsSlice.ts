@@ -21,11 +21,19 @@ import { Character } from '../types/Character';
 interface ListOfCharsState {
   charactersPage: Array<Character>;
   isListLoading: boolean;
+  pagesTotal: number;
+  count: number;
+  next: string | null;
+  prev: string | null;
 }
 
 const initialState: ListOfCharsState = {
   charactersPage: [],
   isListLoading: true,
+  pagesTotal: 0,
+  count: 0,
+  next: null,
+  prev: null,
 };
 
 export const loadCharactersPage = createAsyncThunk(
@@ -36,6 +44,17 @@ export const loadCharactersPage = createAsyncThunk(
     dispatch(setIsListLoading(true));
 
     const response = await getCharacters(pageNumber);
+    const {
+      count,
+      next,
+      prev,
+      pages,
+    } = response.info;
+
+    dispatch(setPagesTotal(pages));
+    dispatch(setCount(count));
+    dispatch(setNext(next));
+    dispatch(setPrev(prev));
 
     dispatch(setIsListLoading(false));
 
@@ -53,6 +72,18 @@ export const listOfChars = createSlice({
     setIsListLoading: (state, action: PayloadAction<boolean>) => {
       state.isListLoading = action.payload;
     },
+    setPagesTotal: (state, action: PayloadAction<number>) => {
+      state.pagesTotal = action.payload;
+    },
+    setNext: (state, action: PayloadAction<string | null>) => {
+      state.next = action.payload;
+    },
+    setPrev: (state, action: PayloadAction<string | null>) => {
+      state.prev = action.payload;
+    },
+    setCount: (state, action: PayloadAction<number>) => {
+      state.count = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(loadCharactersPage.fulfilled, (state, action) => {
@@ -64,11 +95,19 @@ export const listOfChars = createSlice({
 export const {
   setCharacters,
   setIsListLoading,
+  setPagesTotal,
+  setNext,
+  setPrev,
+  setCount,
 } = listOfChars.actions;
 
 export const selectors = {
   getCharactersPage: (state: RootState) => state.listOfChars.charactersPage,
   getIsListLoading: (state: RootState) => state.listOfChars.isListLoading,
+  getPrev: (state: RootState) => state.listOfChars.prev,
+  getNext: (state: RootState) => state.listOfChars.next,
+  getPagesTotal: (state: RootState) => state.listOfChars.pagesTotal,
+  getCount: (state: RootState) => state.listOfChars.count,
 };
 
 export default listOfChars.reducer;
