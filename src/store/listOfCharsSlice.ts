@@ -41,8 +41,6 @@ export const loadCharactersPage = createAsyncThunk(
   async (pageNumber: string, thunkAPI) => {
     const { dispatch } = thunkAPI;
 
-    dispatch(setIsListLoading(true));
-
     const response = await getCharacters(pageNumber);
     const {
       count,
