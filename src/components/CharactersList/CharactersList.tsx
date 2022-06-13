@@ -47,7 +47,7 @@ export const CharactersList: React.FC<{}> = React.memo(() => {
       } else {
         dispath(setFilteredByNameChars([]));
       }
-    }, 100), [],
+    }, 300), [],
   );
 
   useEffect(() => {
