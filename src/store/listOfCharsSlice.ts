@@ -15,10 +15,12 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '.';
-import { getCharacters } from '../api/api';
+import { getCharacters, getCharactersByName } from '../api/api';
 import { Character } from '../types/Character';
 
 interface ListOfCharsState {
+  isFilterLoading: boolean;
+  filteredByNameChars: Array<Character>;
   charactersPage: Array<Character>;
   isListLoading: boolean;
   pagesTotal: number;
@@ -28,6 +30,8 @@ interface ListOfCharsState {
 }
 
 const initialState: ListOfCharsState = {
+  isFilterLoading: false,
+  filteredByNameChars: [],
   charactersPage: [],
   isListLoading: true,
   pagesTotal: 0,
@@ -60,6 +64,25 @@ export const loadCharactersPage = createAsyncThunk(
   },
 );
 
+export const loadFilteredByNameChars = createAsyncThunk(
+  'listOfChars/loadFilteredByNameChars',
+  async (query: string, thunkAPI) => {
+    const { dispatch } = thunkAPI;
+
+    dispatch(setIsFilterLoading(true));
+
+    try {
+      const response = await getCharactersByName(query);
+
+      return response.results;
+    } catch (e) {
+      return [];
+    } finally {
+      dispatch(setIsFilterLoading(false));
+    }
+  },
+);
+
 export const listOfChars = createSlice({
   name: 'listOfPosts',
   initialState,
@@ -82,11 +105,21 @@ export const listOfChars = createSlice({
     setCount: (state, action: PayloadAction<number>) => {
       state.count = action.payload;
     },
+    setIsFilterLoading: (state, action: PayloadAction<boolean>) => {
+      state.isFilterLoading = action.payload;
+    },
+    setFilteredByNameChars: (state, action: PayloadAction<Array<Character>>) => {
+      state.filteredByNameChars = action.payload;
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(loadCharactersPage.fulfilled, (state, action) => {
-      state.charactersPage = action.payload;
-    });
+    builder
+      .addCase(loadCharactersPage.fulfilled, (state, action) => {
+        state.charactersPage = action.payload;
+      })
+      .addCase(loadFilteredByNameChars.fulfilled, (state, action) => {
+        state.filteredByNameChars = action.payload;
+      });
   },
 });
 
@@ -97,6 +130,8 @@ export const {
   setNext,
   setPrev,
   setCount,
+  setIsFilterLoading,
+  setFilteredByNameChars,
 } = listOfChars.actions;
 
 export const selectors = {
@@ -106,6 +141,8 @@ export const selectors = {
   getNext: (state: RootState) => state.listOfChars.next,
   getPagesTotal: (state: RootState) => state.listOfChars.pagesTotal,
   getCount: (state: RootState) => state.listOfChars.count,
+  getFilteredByNameChars: (state: RootState) => state.listOfChars.filteredByNameChars,
+  getIsFilterLoading: (state: RootState) => state.listOfChars.isFilterLoading,
 };
 
 export default listOfChars.reducer;

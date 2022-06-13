@@ -14,3 +14,13 @@ export const getCharacterById = async (id: string): Promise<Character> => {
 
   return response.json();
 };
+
+export const getCharactersByName = async (name: string): Promise<CharactersResponse> => {
+  const response = await fetch(`${BASE_URL}/character/?name=${name}`);
+
+  if (response.ok) {
+    return response.json();
+  }
+
+  throw new Error('no mathches');
+};

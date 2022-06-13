@@ -8,6 +8,7 @@ type info = {
 };
 
 export interface CharactersResponse {
+  error?: string;
   info: info;
   results: Array<Character>;
 }
