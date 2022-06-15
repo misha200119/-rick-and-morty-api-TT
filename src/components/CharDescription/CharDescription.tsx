@@ -36,17 +36,26 @@ export const CharDescription: React.FC<Props> = React.memo(({ charId }) => {
             </div>
           </div>
         ) : (
-          <div>
-            <div className={styles.charDescription}>
-              <h1 className={styles.charDescription__title}>
-                {selectedCharacter?.name}
-              </h1>
-              <div className={styles.charDescription__content}>
-                <img
-                  src={selectedCharacter?.image}
-                  alt="Character"
-                  className={styles.charDescription__image}
-                />
+          <div className={classNames(
+            'container',
+            styles.charDescription,
+          )}
+          >
+            <div className={classNames(
+              styles.charDescription__content,
+              'bg-dark',
+            )}
+            >
+              <img
+                src={selectedCharacter?.image}
+                alt="Character"
+                className={styles.charDescription__image}
+              />
+              <div className="d-flex justify-content-center flex-column gap-3">
+                <h1 className={styles.charDescription__title}>
+                  {selectedCharacter?.name}
+                </h1>
+
                 <p>
                   <strong>
                     Species:
@@ -54,6 +63,7 @@ export const CharDescription: React.FC<Props> = React.memo(({ charId }) => {
                   &nbsp;
                   {selectedCharacter?.species}
                 </p>
+
                 <p>
                   <strong>
                     Gender:
@@ -61,6 +71,7 @@ export const CharDescription: React.FC<Props> = React.memo(({ charId }) => {
                   &nbsp;
                   {selectedCharacter?.gender}
                 </p>
+
                 <p>
                   <strong>
                     Location:
@@ -68,27 +79,7 @@ export const CharDescription: React.FC<Props> = React.memo(({ charId }) => {
                   &nbsp;
                   {selectedCharacter?.location.name}
                 </p>
-                <p>
-                  <strong>
-                    Episodes:
-                  </strong>
-                  &nbsp;
-                </p>
-                <div
-                  className={
-                    classNames(
-                      styles.charDescription__listEpisodes,
-                    )
-                  }
-                >
-                  {
-                    selectedCharacter?.episode.map(episode => (
-                      <div key={episode} className={styles.charDescription__listEpisodes_item}>
-                        {episode.split('/')[5]}
-                      </div>
-                    ))
-                  }
-                </div>
+
                 <p>
                   <strong>
                     Status:
@@ -121,21 +112,46 @@ export const CharDescription: React.FC<Props> = React.memo(({ charId }) => {
                   {selectedCharacter?.created}
                 </p>
               </div>
+
+              <div className="d-flex flex-column p-4">
+                <p>
+                  <strong>
+                    Episodes:
+                  </strong>
+                  &nbsp;
+                </p>
+                <div
+                  className={
+                    classNames(
+                      styles.charDescription__listEpisodes,
+                    )
+                  }
+                >
+                  {
+                    selectedCharacter?.episode.map(episode => (
+                      <div key={episode} className={styles.charDescription__listEpisodes_item}>
+                        {episode.split('/')[5]}
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className={
+                  classNames(
+                    'btn-close btn-close-red',
+                    styles.closeBtn,
+                  )
+                }
+                onClick={() => {
+                  navigate(-1);
+                }}
+                aria-label="Close"
+              >
+              </button>
             </div>
-            <button
-              type="button"
-              className={
-                classNames(
-                  'btn-close btn-close-red',
-                  styles.closeBtn,
-                )
-              }
-              onClick={() => {
-                navigate(-1);
-              }}
-              aria-label="Close"
-            >
-            </button>
           </div>
         )
       }

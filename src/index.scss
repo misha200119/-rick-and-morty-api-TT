@@ -1,5 +1,5 @@
+@import './utils/custom';
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import './utils/vars';
 
 
 body {
@@ -9,8 +9,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
-  background-color: $site-bg;
+}
+
+#root{
+  background-image: url('./images/Background-high-resolution.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 code {

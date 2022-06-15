@@ -61,7 +61,7 @@ export const CharactersList: React.FC<{}> = React.memo(() => {
   }
 
   return (
-    <div className="container-xl">
+    <div className={styles.wrapper}>
       {
         isLoading ? (
           <div className="d-flex justify-content-center">
@@ -71,10 +71,11 @@ export const CharactersList: React.FC<{}> = React.memo(() => {
           </div>
         ) : (
           <>
-            <h1 className="d-flex justify-content-center">
-              Characters List
-            </h1>
-            <div className="container d-flex pb-4">
+            <div className={classNames(
+              'container d-flex pb-4 pt-4',
+              styles.headWrap,
+            )}
+            >
               <Autocomplete
                 getItemValue={(character) => character.name}
                 items={filteredChars}
@@ -106,8 +107,16 @@ export const CharactersList: React.FC<{}> = React.memo(() => {
                 )
               }
             </div>
-            <div className="container">
-              <ul className={styles.characterList}>
+            <div className={classNames(
+              'container',
+              styles.mainWrap,
+            )}
+            >
+              <ul className={classNames(
+                styles.characterList,
+                'bg-dark',
+              )}
+              >
                 {pageOfCharacters.map(character => (
                   <li key={character.id}>
                     <div
@@ -142,6 +151,13 @@ export const CharactersList: React.FC<{}> = React.memo(() => {
                   </li>
                 ))}
               </ul>
+            </div>
+            <div
+              className={classNames(
+                styles.footerWrap,
+                'container d-flex pb-4 pt-4 justify-content-center',
+              )}
+            >
               <PagesNavigator />
             </div>
           </>

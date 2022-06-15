@@ -1,0 +1,9 @@
+$active-link-text-color: rgb(255, 152, 0);
+$dark: rgb(32, 35, 41);
+$nav-link-hover-color: $active-link-text-color;
+$nav-link-color: white;
+
+.nav-item > a.active {
+  color: $active-link-text-color;
+}
+

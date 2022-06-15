@@ -67,17 +67,36 @@ export const PagesNavigator: React.FC<{}> = memo(() => {
   }, []);
 
   return (
-    <div className={styles.pagination}>
+    <div className={
+      classNames(
+        styles.pagination,
+        'bg-dark',
+      )
+    }
+    >
       <div className={styles.pagination__btnWrap}>
         <button
-          className={styles.pagination__btn}
+          className={
+            classNames(
+              styles.pagination__btn,
+            )
+          }
           disabled={isPrevDisabled}
           type="button"
           onClick={() => {
             back(currentPage);
           }}
         >
-          «
+          <p
+            className={
+              classNames(
+                { pagination__btn_disabled: isPrevDisabled },
+                'mb-0',
+              )
+            }
+          >
+            «
+          </p>
         </button>
 
         <div className={styles.pagination__centerBtnsContainer}>
@@ -85,7 +104,12 @@ export const PagesNavigator: React.FC<{}> = memo(() => {
             if (elem.value === '...') {
               return (
                 <p
-                  className="pagination__etc"
+                  className={
+                    classNames(
+                      'pagination__etc',
+                      'mb-0',
+                    )
+                  }
                   key={elem.key}
                 >
                   {elem.value}
@@ -121,7 +145,16 @@ export const PagesNavigator: React.FC<{}> = memo(() => {
             next(currentPage);
           }}
         >
-          »
+          <p
+            className={
+              classNames(
+                { pagination__btn_disabled: isNextDisabled },
+                'mb-0',
+              )
+            }
+          >
+            »
+          </p>
         </button>
       </div>
     </div>

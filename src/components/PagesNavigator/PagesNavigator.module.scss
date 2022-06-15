@@ -1,11 +1,16 @@
 .pagination {
   display: flex;
   justify-content: center;
+  padding: 4px;
+  border-radius: 30px;
+
   &__title {
     text-align: center;
   }
   &__etc {
     display: inline-block;
+    color: white;
+    width: 50px;
   }
 
   &__btnWrap {
@@ -20,11 +25,22 @@
   }
 
   &__btn {
-    height: 50px;
+    height: fit-content;
     width: fit-content;
-    border-radius: 10px;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    color: white;
     &_selected {
-      background-color: orange;
+      color: orange;
+    }
+
+    &_disabled {
+      color: gray;
+    }
+
+    &:hover {
+      background-color: lightgray;
     }
   }
 }
